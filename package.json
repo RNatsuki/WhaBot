@@ -8,6 +8,8 @@
     "start": "ts-node src/server.ts"
   },
   "dependencies": {
+    "@whiskeysockets/baileys": "^6.7.5",
+    "@wppconnect-team/wppconnect": "^1.32.4",
     "express": "^4.19.2",
     "venom-bot": "^5.1.0"
   }
