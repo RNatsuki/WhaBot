@@ -1,18 +1,19 @@
 import fs from "fs";
 
-import { WhaProvider } from "../interfaces/WhaProvider";
+import { ProviderClass } from "../core/ProviderClass";
 import {
   create,
   type Whatsapp,
   defaultLogger,
 } from "@wppconnect-team/wppconnect";
 
-defaultLogger.transports.forEach((t) => (t.silent = true));
+//defaultLogger.transports.forEach((t) => (t.silent = true));
 
-export class WPPConnect implements WhaProvider {
+export class WPPConnect extends ProviderClass {
   private client: Whatsapp | null = null;
   private clientReady: Promise<void>;
   constructor() {
+    super()
     this.clientReady = this.initializeClient();
   }
 
@@ -40,7 +41,7 @@ export class WPPConnect implements WhaProvider {
       });
 
       this.client = instance;
-      console.log("Client is ready for sending messages");
+      this.emit('ready')
       return Promise.resolve();
     } catch (error) {
       console.log(error);
